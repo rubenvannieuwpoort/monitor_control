@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# To adapt this script for your monitor:
+#   1. Make sure you have i2c-tools and ddccontrol installed:
+#          sudo apt-get install i2c-tools ddccontrol
+#   2. Enable kernel module
+#          sudo modprobe i2c-dev
+#   3. Find out the id's of the monitors:
+#          sudo i2cdetect -l
+#      and try the id's of the form i2c-X:
+#          sudo ddccontrol dev:/dev/i2c-X
+#
+#   4. If you have found the monitor, look for the address that
+#      identifies contrast. Replace the 0x10 with this.
+
+if [[ 0 -le $1 ]] && [[ $1 -le 100 ]]; then
+	ddccontrol dev:/dev/i2c-6 -r 0x12 -w $1 > /dev/null 2>&1
+	ddccontrol dev:/dev/i2c-7 -r 0x12 -w $1 > /dev/null 2>&1
+fi
+
