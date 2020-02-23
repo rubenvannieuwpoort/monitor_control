@@ -3,7 +3,7 @@
 I have a Linux system with multiple monitors. I couldn't find a GUI widget that controls the brightness and contrast of the monitor (the only ones I could find modified the screen using software, which is not what I'm looking for). So I made my own commandline tool.
 
 
-# Usage
+## Usage
 
 First configure the scripts using the instructions in the source. You should have one line for each monitor. The brightness and contrast scripts should be mostly identical, except for the value after the -r commandline switch.
 
