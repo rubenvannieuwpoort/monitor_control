@@ -15,4 +15,4 @@ After this, you can simply do
 
     brightness 50 && contrast 50
 
-From the commandline.
+from the terminal.
