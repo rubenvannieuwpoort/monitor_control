@@ -11,8 +11,25 @@ Now, place the scripts somewhere in your $PATH. I have put them in ~/bin, and ad
 
     export PATH=~/bin:$PATH
 
-After this, you can simply do
+After this, you can use the scripts in different ways:
 
-    brightness 50 && contrast 50
+Read the current brightness:
 
-from the terminal.
+    > brightness
+    50
+
+Increase the current brightness:
+
+    > brightness +20
+    70
+
+Decrease the current brightness:
+
+    > brightness -10
+    60
+
+Set the brightness:
+
+    > brightness 65
+
+Of course, the same thing works for the contrast.
