@@ -11,10 +11,38 @@
 #          sudo ddccontrol dev:/dev/i2c-X
 #
 #   4. If you have found the monitor, look for the address that
-#      identifies contrast. Replace the 0x10 with this.
+#      identifies contrast. Replace the 0x12 with this.
 
-if [[ 0 -le $1 ]] && [[ $1 -le 100 ]]; then
-	ddccontrol dev:/dev/i2c-6 -r 0x12 -w $1 > /dev/null 2>&1
-	ddccontrol dev:/dev/i2c-7 -r 0x12 -w $1 > /dev/null 2>&1
+contrast=0
+
+if [[ ! -z $1 ]]; then
+	sign=${1:0:1}
 fi
 
+if [[ -z $1 ]] || [[ "$sign" = "+" ]] || [[ "$sign" = "-" ]]; then
+	contrast=$(ddccontrol dev:/dev/i2c-6 -r 0x12 2>/dev/null | tail -1 | awk -F '[//]' '{ print $(NF-1) }')
+	change=true
+fi
+
+if [[ -z $1 ]]; then
+	echo "$contrast"
+else
+	if [[ "$change" = true ]]; then
+		contrast=$(($contrast+$1))
+		if [[ $contrast -gt 100 ]]; then
+			contrast=100
+		elif [[ $contrast -lt 0 ]]; then
+			contrast=0
+		fi
+	else
+		contrast="$1"
+	fi
+	
+	if [[ 0 -le $contrast ]] && [[ $contrast -le 100 ]]; then
+		ddccontrol dev:/dev/i2c-6 -r 0x12 -w $contrast > /dev/null 2>&1
+		ddccontrol dev:/dev/i2c-7 -r 0x12 -w $contrast > /dev/null 2>&1
+		if [[ "$change" = true ]]; then
+			echo "$contrast"
+		fi
+	fi
+fi
