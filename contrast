@@ -13,6 +13,21 @@
 #   4. If you have found the monitor, look for the address that
 #      identifies contrast. Replace the 0x12 with this.
 
+
+if [[ "$1" == "--help" ]]; then
+	echo "Usage:"
+	echo "    contrast [<argument>]"
+	echo
+	echo "Without argument, contrast simply returns the current monitor contrast."
+	echo
+	echo "The argument can be (n denotes a number):"
+	echo "  <n>  Set the contrast level to <n>"
+	echo " +<n>  Increase the current contrast level by <n>"
+	echo " -<n>  Decrease the current contrast level by <n>"
+	echo
+	exit 0
+fi
+
 contrast=0
 
 if [[ ! -z $1 ]]; then

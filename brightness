@@ -13,6 +13,20 @@
 #   4. If you have found the monitor, look for the address that
 #      identifies brightness. Replace the 0x10 with this.
 
+if [[ "$1" == "--help" ]]; then
+	echo "Usage:"
+	echo "    brightness [<argument>]"
+	echo
+	echo "Without argument, brightness simply returns the current monitor brightness."
+	echo
+	echo "The argument can be (n denotes a number):"
+	echo "  <n>  Set the brightness level to <n>"
+	echo " +<n>  Increase the current brightness level by <n>"
+	echo " -<n>  Decrease the current brightness level by <n>"
+	echo
+	exit 0
+fi
+
 brightness=0
 
 if [[ ! -z $1 ]]; then
